@@ -1,0 +1,378 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0">
+<link rel='shortcut icon' href='https://op.2024-10-24.zip/logo.jpg'>
+<link rel='icon' href='https://op.2024-10-24.zip/logo.jpg'>
+<link rel='apple-touch-icon-precomposed' href='https://op.2024-10-24.zip/logo.jpg'>
+<meta name='msapplication-TileImage' content='https://op.2024-10-24.zip/logo.jpg'>
+<title>开源毛绒玩偶库 · Open Plush</title>
+<meta name="description" content="开源毛绒玩偶图纸与教程合集。下载免费图纸、查看制作步骤、参与贡献与发布你的设计。" />
+<link rel="icon" href="data:;base64,iVBORw0KGgo=">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+<style>
+:root{
+    --bg:#f7fafc; --card:#ffffff; --accent:#e43d3d; --muted:#556;
+    --radius:12px; --gap:16px; --max-width:1100px;
+}
+*{box-sizing:border-box}
+body{
+    margin:0; font-family: "Inter", "Segoe UI", "Microsoft YaHei", system-ui, sans-serif;
+    background:var(--bg); color:#0b1720; line-height:1.45;
+}
+.site {
+    max-width: var(--max-width);
+    margin: 28px auto;
+    padding: 20px;
+}
+
+header { display:flex; align-items:center; gap:16px; justify-content:space-between; margin-bottom:18px;}
+.brand { display:flex; gap:12px; align-items:center;}
+.logo {
+    width:56px; height:56px; border-radius:10px; background:linear-gradient(135deg,#fff 0,#ffecec 100%);
+    display:flex; align-items:center; justify-content:center; font-weight:700; color:var(--accent); box-shadow:0 4px 14px rgba(0,0,0,.06);
+}
+h1 { margin:0; font-size:1.2rem; color:var(--accent); }
+.tagline { color:var(--muted); font-size:0.95rem }
+
+main { margin-top:18px; }
+
+.hero {
+    display:flex; gap:24px; align-items:center; background:linear-gradient(180deg,#fff,#fff);
+    padding:18px; border-radius:var(--radius); box-shadow:0 6px 20px rgba(12,20,40,.06);
+}
+.hero .intro { flex:1; }
+.hero h2 { margin:0 0 8px 0; font-size:1.25rem; color:#0b1720;}
+.hero p { margin:0 0 12px 0; color:var(--muted); }
+.hero .actions { display:flex; gap:10px; flex-wrap:wrap; }
+.controls { display:flex; gap:10px; margin:14px 0; flex-wrap:wrap; }
+.search {
+    flex-basis: 100%; 
+    display:flex; gap:8px; align-items:center;
+    background:var(--card); border-radius:10px; padding:8px 10px; box-shadow:0 2px 8px rgba(12,20,40,.04);
+}
+.search input { border:0; outline:none; font-size:14px; flex:1; background:transparent; }
+.select {
+    position: relative; 
+    background: var(--card);
+    border-radius: 10px;
+    padding: 0;
+    box-shadow: 0 2px 8px rgba(12,20,40,.04);
+    display: inline-block;
+    min-width: 140px; 
+    flex-grow: 1; 
+}
+.select select {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    font-family: inherit;
+    font-size: 0.95rem; 
+    line-height: 1.45;
+    color: #0b1720;
+    padding: 8px 30px 8px 10px; 
+    border: none;
+    background: transparent;
+    width: 100%;
+    cursor: pointer;
+    outline: none; 
+}
+.select:focus-within {
+    outline: 3px solid rgba(11,102,255,0.15);
+    outline-offset: 2px;
+}
+.select:after {
+    content: "▼"; 
+    position: absolute;
+    top: 50%;
+    right: 12px;
+    transform: translateY(-50%) scale(0.6); 
+    pointer-events: none; 
+    color: var(--muted);
+}
+.grid {
+    display:grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: var(--gap);
+    margin-top:10px;
+}
+@media (max-width: 500px) {
+    .grid {
+        grid-template-columns: 1fr; 
+    }
+    .search {
+        flex-basis: 100%;
+    }
+    .select {
+        flex-basis: calc(50% - 5px); 
+    }
+}
+.card {
+    background:var(--card); border-radius:12px; padding:12px; box-shadow:0 6px 18px rgba(12,20,40,.04);
+    display:flex; flex-direction:column; gap:8px;
+}
+.thumb {
+    width:100%; height:180px; border-radius:8px; overflow:hidden; background:#f2f4f6; display:flex; align-items:center; justify-content:center;
+}
+.thumb img { width:100%; height:100%; object-fit:cover; display:block; }
+.meta { display:flex; gap:8px; align-items:center; color:var(--muted); font-size:13px; }
+.tags { margin-top:6px; display:flex; gap:6px; flex-wrap:wrap; }
+.tag-pill { background:#f0f4f6; color:#234; padding:6px 8px; border-radius:999px; font-size:12px; }
+.card .title { font-weight:700; margin:0; }
+.card .desc { color:var(--muted); font-size:14px; margin:4px 0 0 0; flex:1; }
+.card .actions { display:flex; gap:8px; margin-top:8px; align-items:center; flex-wrap:wrap; }
+.btn { padding:8px 10px; border-radius:8px; text-decoration:none; font-size:13px; border:1px solid transparent; color:#fff; background:var(--accent); display:inline-flex; gap:8px; align-items:center; }
+.btn.ghost { background:transparent; color:var(--accent); border-color:#eee; }
+.btn.small { padding:6px 8px; font-size:13px; }
+footer { margin-top:28px; color:var(--muted); font-size:13px; text-align:center; padding:18px 0; }
+@media (max-width:720px){
+    .site {
+        padding: 10px; 
+    }
+    header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    .hero { flex-direction:column; align-items:flex-start; }
+    .thumb { height:160px; }
+    .hero > div:nth-child(2) { 
+        width: 100% !important; 
+    }
+    .search { 
+        flex-basis: 100%; 
+    }
+    .select {
+        flex-basis: calc(50% - 5px); 
+        min-width: unset; 
+    }
+    .controls {
+        justify-content: space-between; 
+    }
+    .btn.ghost.small {
+        flex-grow: 1; 
+    }
+}
+a:focus, button:focus, input:focus { outline: 3px solid rgba(11,102,255,0.15); outline-offset:2px; }
+</style>
+</head>
+<body>
+<div class="site">
+    <header>
+        <div class="brand">
+            <div class="logo" aria-hidden="true">OP</div>
+            <div>
+                <h1>OpenPlush</h1>
+                <div class="tagline">开源毛绒玩偶图纸 · 免费下载 · 社区协作</div>
+            </div>
+        </div>
+    </header>
+    <main>
+        <section class="hero" aria-labelledby="hero-title">
+            <div class="intro">
+                <h2 id="hero-title">为每个人保存并分享手作玩偶的图纸</h2>
+                <p>在这里你可以找到免费、开源、可修改的玩偶纸样（PDF/PNG/ZIP），包含缝制说明、材料清单与针法技巧，欢迎收藏和分享。</p>
+                <div class="actions">
+                    <a class="btn" href="#gallery" role="button"><i class="fa-solid fa-paw"></i> 浏览毛绒玩偶</a>
+                    </div>
+            </div>
+            <div>
+                <div class="card" style="padding:14px;">
+                    <div style="font-weight:700">快速开始</div>
+                    <ol style="margin:8px 0 0 18px; color:var(--muted); font-size:14px">
+                        <li>浏览喜欢的玩偶 → 下载图纸裁片</li>
+                        <li>按照说明缝制 → 分享给周边的人</li>
+                        <li>进入讨论区进行评论/聊天</li>
+                    </ol>
+                </div>
+            </div>
+        </section>
+        <section aria-label="筛选与搜索" style="margin-top:18px;">
+            <div class="controls">
+                <div class="search" role="search" aria-label="搜索玩偶">
+                    <i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i>
+                    <input id="searchInput" type="search" placeholder="搜索名称、标签或描述（例如：猫、兔子、迷你）" aria-label="搜索玩偶"/>
+                </div>
+                <label class="select">
+                    <select id="protocol" aria-label="资源类型">
+                        <option value="">全部资源类型</option>
+                        <option value="pdf">PDF 图纸</option>
+                        <option value="knit">编织/钩针</option>
+                        <option value="pattern">裁片 / 缝纫</option>
+                    </select>
+                </label>
+                <label class="select">
+                    <select id="license" aria-label="许可">
+                        <option value="">所有许可</option>
+                        <option value="cc-by-sa">CC BY-SA</option>
+                        <option value="cc0">CC0（公有）</option>
+                        <option value="mit">MIT（源码）</option>
+                    </select>
+                </label>
+                <button id="clearBtn" class="btn ghost small" aria-label="清除筛选">清除</button>
+            </div>
+        </section>
+        <section id="gallery" aria-labelledby="gallery-title" style="margin-top:10px;">
+            <h3 id="gallery-title" style="margin:0 0 8px 0">图纸与说明 · 开源玩偶</h3>
+            <p style="color:var(--muted); margin:0 0 12px 0">点击“下载”获取图纸（PDF/ZIP），点击“仓库”查看源文件与贡献方法。</p>
+            <div id="grid" class="grid" role="list">
+                </div>
+        </section>
+        <section id="about" style="margin-top:18px;">
+            <div class="card">
+                <h3>关于 OpenPlush</h3>
+                <p style="color:var(--muted)">这是一个社区驱动的开源毛绒玩偶图纸库，目标是降低手作门槛，让更多人能免费获取好看、可修改、可重用的图纸与教程。</p>
+                <p style="color:var(--muted)">
+                    <strong>联系讨论：</strong>
+                    <a class="btn ghost small" href="https://2024-10-24.zip/chat.txt" target="_blank" rel="noopener noreferrer">
+                        <i class="fa-solid fa-comments"></i>
+                        公开讨论/聊天区
+                    </a>
+                </p>
+            </div>
+        </section>
+    </main>
+    <footer>
+        <div>© <span id="year"></span> OpenPlush · 开源毛绒玩偶社区 · 推荐许可：CC BY-SA</div>
+    </footer>
+</div>
+<script>
+const entries = [
+    {
+        name: "小兔子 Bunni",
+        desc: "中等难度，适合初学缝制。包含裁片 PDF 和详细步骤（中/英）。",
+        tags: ["缝纫","兔子","中等"],
+        img: "https://op.2024-10-24.zip/logo.jpg", 
+        resources: [
+            {type:"pdf", label:"下载 PDF 图纸", href:"#"},
+            {type:"pattern", label:"源码与 SVG 裁片", href:"#"}
+        ],
+        license: "cc-by-sa",
+        repo: "https://github.com/example/bunni"
+    },
+    {
+        name: "迷你像素猫",
+        desc: "小型钩针/钩毛线图样，适合初学者，使用 DK 线。",
+        tags: ["钩针","猫","迷你"],
+        img: "https://op.2024-10-24.zip/logo.jpg",
+        resources: [
+            {type:"knit", label:"钩针图与说明 (PDF)", href:"#"},
+            {type:"pdf", label:"打印版 PDF", href:"#"}
+        ],
+        license: "cc0",
+        repo: "https://github.com/example/pixelcat"
+    },
+    {
+        name: "大号熊抱抱",
+        desc: "可坐式大号毛绒玩偶，含缝合与填充指南，建议填充 PP 棉。",
+        tags: ["大型","熊","缝纫"],
+        img: "https://op.2024-10-24.zip/logo.jpg",
+        resources: [
+            {type:"pdf", label:"A0 拼接图纸 (ZIP)", href:"#"},
+            {type:"pattern", label:"分层 SVG 裁片", href:"#"}
+        ],
+        license: "cc-by-sa",
+        repo: "https://github.com/example/bigbear"
+    },
+    {
+        name: "Teleport Plush — Telefox",
+        desc: "复古机器人风玩偶，带可拆卸配件与可打印 PLA 部分（非纺织）。",
+        tags: ["混合","机器人","3D-可打印"],
+        img: "https://op.2024-10-24.zip/logo.jpg",
+        resources: [
+            {type:"pdf", label:"图纸与说明", href:"#"},
+            {type:"repo", label:"Git 仓库", href:"https://github.com/example/telefox"}
+        ],
+        license: "mit",
+        repo: "https://github.com/example/telefox"
+    }
+];
+function el(tag, attrs={}, children=[]){
+    const d = document.createElement(tag);
+    for(const k in attrs){
+        if(k === 'class') d.className = attrs[k];
+        else if(k === 'innerHTML') d.innerHTML = attrs[k];
+        else d.setAttribute(k, attrs[k]);
+    }
+    if(typeof children === 'string') d.textContent = children;
+    else children.forEach(c => d.appendChild(typeof c === 'string' ? document.createTextNode(c) : c));
+    return d;
+}
+function renderGrid(list){
+    const grid = document.getElementById('grid');
+    grid.innerHTML = '';
+    list.forEach(item => {
+        const card = el('article',{class:'card', role:'listitem'});
+        const thumb = el('div',{class:'thumb'});
+        const img = document.createElement('img');
+        img.alt = item.name + ' 缩略图';
+        img.src = item.img;
+        thumb.appendChild(img);
+        const title = el('div',{class:'title', innerHTML: item.name});
+        const desc = el('div',{class:'desc', innerHTML: item.desc});
+        const tagsWrap = el('div',{class:'tags'});
+        item.tags.forEach(t=> tagsWrap.appendChild(el('span',{class:'tag-pill'}, t)));
+
+        const meta = el('div',{class:'meta'}, [
+            el('div',{}, [`许可: ${item.license.toUpperCase()}`])
+        ]);
+        const actions = el('div',{class:'actions'});
+        item.resources.forEach(res=>{
+            const a = document.createElement('a');
+            a.className = 'btn small';
+            if(res.type === 'pdf') a.innerHTML = '<i class="fa-solid fa-file-pdf"></i> ' + res.label;
+            else if(res.type === 'knit') a.innerHTML = '<i class="fa-solid fa-sparkles"></i> ' + res.label;
+            else if(res.type === 'pattern') a.innerHTML = '<i class="fa-solid fa-cut"></i> ' + res.label;
+            else if(res.type === 'repo') a.innerHTML = '<i class="fa-solid fa-code-branch"></i> ' + res.label;
+            a.href = res.href || '#';
+            a.target = '_blank';
+            a.rel = 'noopener noreferrer';
+            actions.appendChild(a);
+        });
+        if(item.repo){
+            const repo = el('a',{class:'btn ghost small', href:item.repo, target:'_blank', rel:'noopener noreferrer', innerHTML: '<i class="fa-brands fa-github"></i> 仓库'});
+            actions.appendChild(repo);
+        }
+        card.appendChild(thumb);
+        card.appendChild(title);
+        card.appendChild(desc);
+        card.appendChild(tagsWrap);
+        card.appendChild(meta);
+        card.appendChild(actions);
+        grid.appendChild(card);
+    });
+}
+const searchInput = document.getElementById('searchInput');
+const protocolS = document.getElementById('protocol');
+const licenseS = document.getElementById('license');
+const clearBtn = document.getElementById('clearBtn');
+function applyFilters(){
+    const q = (searchInput.value || '').trim().toLowerCase();
+    const prot = (protocolS.value || '').toLowerCase();
+    const lic = (licenseS.value || '').toLowerCase();
+    const filtered = entries.filter(e=>{
+        const text = (e.name + ' ' + e.desc + ' ' + (e.tags||[]).join(' ') + ' ' + (e.license||'')).toLowerCase();
+        if(q && !text.includes(q)) return false;
+        if(prot){
+            const has = (e.resources || []).some(r=> (r.type||'').toLowerCase() === prot);
+            if(!has) return false;
+        }
+        if(lic && e.license !== lic) return false;
+        return true;
+    });
+    renderGrid(filtered);
+}
+clearBtn.addEventListener('click', ()=>{
+    searchInput.value = '';
+    protocolS.value = '';
+    licenseS.value = '';
+    applyFilters();
+});
+searchInput.addEventListener('input', applyFilters);
+protocolS.addEventListener('change', applyFilters);
+licenseS.addEventListener('change', applyFilters);
+renderGrid(entries);
+document.getElementById('year').textContent = new Date().getFullYear();
+</script>
+</body>
+</html>
